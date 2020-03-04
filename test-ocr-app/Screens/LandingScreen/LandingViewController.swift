@@ -22,11 +22,10 @@ class LandingViewController: UIViewController {
     private let imagePicker: UIImagePickerController = UIImagePickerController()
     
     required init?(coder: NSCoder) {
-        if #available(iOS 13.0, *) {
-            self.viewModel = LandingPageViewModel(photoReader: VisionPhotoReader(), dataManager: DataManager())
-        } else {
-            self.viewModel = LandingPageViewModel(photoReader: OtherPhotoReader(), dataManager: DataManager())
-        }
+        let photoReader = PhotoReaderFactory().createPhotoReader()
+        let dataManager = DataManager()
+        
+        self.viewModel = LandingPageViewModel(photoReader: photoReader, dataManager: dataManager)
         
         super.init(coder: coder)
     }
@@ -38,9 +37,6 @@ class LandingViewController: UIViewController {
     }
     
     @IBAction private func takePicture() {
-        // TODO: handle revoking authorization
-        // TODO: handle denied/restricted states
-        
         switch AVCaptureDevice.authorizationStatus(for: .video) {
             case .authorized: self.presentImagePicker()
             case .notDetermined: // The user has not yet been asked for camera access.
@@ -50,25 +46,32 @@ class LandingViewController: UIViewController {
                     }
                 }
             
-            case .denied: // The user has previously denied access.
+            case .denied:
+                self.presentCameraAlert(text: "You have denied camera access. Without camera you're device have to sadly refuse reading text from image as it is blind. If you think we're good, please go to settings and grant access")
                 return
 
-            case .restricted: // The user can't grant access due to restrictions.
+            case .restricted:
+                self.presentCameraAlert(text: "Access to camera is restricted and cannot be granted. Contact your parents or administrator")
                 return
+        @unknown default:
+            fatalError()
         }
     }
     
+    private func presentCameraAlert(text: String) {
+        let alert = AlertsFactory().createCameraAlertController(text: text)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     private func presentImagePicker() {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            
-        } else {
-            // TODO: present info that camre permission is needed
+        if !UIImagePickerController.isSourceTypeAvailable(.camera) {
+            self.presentCameraAlert(text: "Camera is unavailable")
             return
         }
         
         let availableMediaTypes = UIImagePickerController.availableMediaTypes(for: .camera) ?? []
         if !availableMediaTypes.contains(String(kUTTypeImage)) {
-            // TODO: error - cannot take still image
+            self.presentCameraAlert(text: "Camera is not capable of capturing images")
         }
         
         self.imagePicker.sourceType = .camera
@@ -79,7 +82,10 @@ class LandingViewController: UIViewController {
     }
     
     @IBAction private func browseResults() {
-        self.viewModel.browseResults()
+        let resultsViewModel = ResultsViewModel(dataManager: DataManager())
+        let vc = ResultsTableViewController(viewModel: resultsViewModel)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setup(viewModel: LandingPageViewModel) {
@@ -96,6 +102,6 @@ extension LandingViewController: UIImagePickerControllerDelegate & UINavigationC
         self.imagePicker.dismiss(animated: true, completion: nil)
         
         guard let photo = info[.originalImage] as? UIImage else { return }
-        viewModel.newPhoto(photo)
+        viewModel.processPhoto(photo)
     }
 }

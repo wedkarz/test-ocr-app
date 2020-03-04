@@ -10,9 +10,7 @@ import Foundation
 import UIKit.UIImage
 
 protocol LandingPageViewModeling {
-    func takePicture()
-    func browseResults()
-    func newPhoto(_ photo: UIImage)
+    func processPhoto(_ photo: UIImage)
 }
 
 class LandingPageViewModel: LandingPageViewModeling {
@@ -38,16 +36,7 @@ class LandingPageViewModel: LandingPageViewModeling {
         self.dataManager = dataManager
     }
     
-    
-    func takePicture() {
-        
-    }
-    
-    func browseResults() {
-        
-    }
-    
-    func newPhoto(_ photo: UIImage) {
+    func processPhoto(_ photo: UIImage) {
         let fixedPhoto = photo.fixOrientation()
         guard let imageURL = dataManager.saveImage(fixedPhoto) else { return }
         

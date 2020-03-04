@@ -9,14 +9,6 @@
 import Foundation
 import UIKit
 
-protocol FileManagement {
-    
-}
-
-extension FileManager: FileManagement {
-    
-}
-
 class DataManager: DataManagement {
     private let fileManager: FileManager
     
@@ -64,11 +56,23 @@ class DataManager: DataManagement {
     }
     
     func readImage(at url: URL) -> UIImage? {
-        return nil
+        return UIImage(contentsOfFile: url.path)
     }
     
     func readTextForImage(at url: URL) -> String? {
-        return nil
+        guard let filePath = textfilePathForImageURL(url) else { return nil }
+        
+        return try? String(contentsOfFile: filePath)
+    }
+    
+    private func textfilePathForImageURL(_ url: URL) -> String? {
+        guard let documentsDir = getDocumentsDirectory(fileManager: fileManager) else { return nil }
+        
+        let imageName = url.deletingPathExtension().lastPathComponent
+        let textfileName = "\(imageName)_text.txt"
+        let textfilePath = "\(documentsDir.path)/\(textfileName)"
+        
+        return textfilePath
     }
     
     private func getDocumentsDirectory(fileManager: FileManager) -> URL? {
