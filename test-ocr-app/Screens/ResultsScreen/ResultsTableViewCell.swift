@@ -17,6 +17,8 @@ class ResultsTableViewCell: UITableViewCell {
     }
     
     func setup(with vm: ResultItemViewModel) {
+        self.accessoryType = .disclosureIndicator
+        
         let processor = DownsamplingImageProcessor(size: CGSize(width: 80, height: 80))
                         |> RoundCornerImageProcessor(cornerRadius: 5)
         

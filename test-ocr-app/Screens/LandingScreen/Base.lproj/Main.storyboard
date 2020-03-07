@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LUT-UX-xIX">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -13,32 +13,56 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="LandingViewController" customModule="OCR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="r6X-NC-8jF" userLabel="cameraPreview" customClass="UIImageView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="584"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="374"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fac-vG-W06">
-                                        <rect key="frame" x="20" y="371" width="335" height="193"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.19959020322085891" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qys-7q-0od" userLabel="cardView">
+                                        <rect key="frame" x="20" y="161" width="280" height="193"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fac-vG-W06">
+                                                <rect key="frame" x="5" y="5" width="270" height="158"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to read whole text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFw-jR-0wH">
+                                                <rect key="frame" x="72.5" y="171" width="135" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="193" id="9CT-Ii-LaP"/>
+                                            <constraint firstItem="fac-vG-W06" firstAttribute="leading" secondItem="qys-7q-0od" secondAttribute="leading" constant="5" id="0W9-eG-yjx"/>
+                                            <constraint firstAttribute="bottom" secondItem="tFw-jR-0wH" secondAttribute="bottom" constant="6" id="D2b-J0-xvX"/>
+                                            <constraint firstItem="tFw-jR-0wH" firstAttribute="centerX" secondItem="qys-7q-0od" secondAttribute="centerX" id="GDi-VF-z3Y"/>
+                                            <constraint firstItem="tFw-jR-0wH" firstAttribute="top" secondItem="fac-vG-W06" secondAttribute="bottom" constant="8" symbolic="YES" id="KZf-ty-Eq9"/>
+                                            <constraint firstAttribute="height" constant="193" id="Vea-td-kei"/>
+                                            <constraint firstItem="fac-vG-W06" firstAttribute="top" secondItem="qys-7q-0od" secondAttribute="top" constant="5" id="oy6-XB-rDf"/>
+                                            <constraint firstAttribute="trailing" secondItem="fac-vG-W06" secondAttribute="trailing" constant="5" id="zfS-s3-qKd"/>
                                         </constraints>
-                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="16"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="fac-vG-W06" firstAttribute="leading" secondItem="r6X-NC-8jF" secondAttribute="leading" constant="20" symbolic="YES" id="ElF-CX-LvF"/>
-                                    <constraint firstAttribute="trailing" secondItem="fac-vG-W06" secondAttribute="trailing" constant="20" symbolic="YES" id="L4d-lS-We7"/>
-                                    <constraint firstAttribute="bottom" secondItem="fac-vG-W06" secondAttribute="bottom" constant="20" symbolic="YES" id="Tzv-oV-3Fd"/>
+                                    <constraint firstAttribute="bottom" secondItem="qys-7q-0od" secondAttribute="bottom" constant="20" id="Osl-0D-LUY"/>
+                                    <constraint firstItem="qys-7q-0od" firstAttribute="leading" secondItem="r6X-NC-8jF" secondAttribute="leading" constant="20" id="nSd-GG-xvG"/>
+                                    <constraint firstAttribute="trailing" secondItem="qys-7q-0od" secondAttribute="trailing" constant="20" id="r8Q-ES-NUe"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lUB-pv-AjR">
-                                <rect key="frame" x="0.0" y="599" width="375" height="38"/>
+                                <rect key="frame" x="0.0" y="389" width="320" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Take a picture"/>
                                 <connections>
@@ -46,13 +70,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- or -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNI-sr-FTD">
-                                <rect key="frame" x="0.0" y="670" width="375" height="21"/>
+                                <rect key="frame" x="0.0" y="460" width="320" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2kj-Mv-9cR">
-                                <rect key="frame" x="0.0" y="724" width="375" height="34"/>
+                                <rect key="frame" x="0.0" y="514" width="320" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Browse results"/>
                                 <connections>
@@ -82,6 +106,7 @@
                     <navigationItem key="navigationItem" id="ls3-pu-bfc"/>
                     <connections>
                         <outlet property="browseResultsButton" destination="2kj-Mv-9cR" id="YEF-0P-Xif"/>
+                        <outlet property="cardView" destination="qys-7q-0od" id="q27-4R-FAQ"/>
                         <outlet property="previewView" destination="r6X-NC-8jF" id="MpZ-Fn-1ps"/>
                         <outlet property="resultTextView" destination="fac-vG-W06" id="Kr0-4l-U9X"/>
                         <outlet property="takePictureButton" destination="lUB-pv-AjR" id="Nkr-PC-E68"/>
@@ -89,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1079.2" y="137.4384236453202"/>
+            <point key="canvasLocation" x="1026" y="137"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DIy-H3-wrN">
@@ -97,7 +122,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LUT-UX-xIX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Hte-ae-Nys">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

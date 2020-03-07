@@ -18,7 +18,6 @@ class ResultsTableViewController: UITableViewController {
         super.init(nibName: nil, bundle: nil)
         
         self.tableView.rowHeight = 100
-        self.tableView.allowsSelection = false
         self.tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: ResultsTableViewCell.reuseIdentifier)
     }
     
@@ -42,6 +41,15 @@ class ResultsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.viewModel.itemViewModels.count
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cellVM = viewModel.itemViewModels[indexPath.row]
+        let vc = ResultDetailViewController(viewModel: ResultDetailViewModel(text: cellVM.text ?? "<no text read>", imageURL: cellVM.imageURL))
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        present(vc, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

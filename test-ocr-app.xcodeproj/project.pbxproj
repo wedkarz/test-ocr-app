@@ -28,6 +28,11 @@
 		E65C279824104D01008E57BC /* FirebasePhotoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C278324104D01008E57BC /* FirebasePhotoReader.swift */; };
 		E65C279924104D01008E57BC /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C278524104D01008E57BC /* DataManager.swift */; };
 		E65C279A24104D01008E57BC /* DataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C278624104D01008E57BC /* DataManagement.swift */; };
+		E65C27A624141800008E57BC /* TextResultScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C27A524141800008E57BC /* TextResultScreenViewController.swift */; };
+		E65C27A824141843008E57BC /* ResultScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C27A724141843008E57BC /* ResultScreenViewModel.swift */; };
+		E65C27AA24141C96008E57BC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C27A924141C96008E57BC /* Constants.swift */; };
+		E65C27AD24144E2E008E57BC /* ResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C27AC24144E2E008E57BC /* ResultDetailViewController.swift */; };
+		E65C27AF24144E3D008E57BC /* ResultDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C27AE24144E3D008E57BC /* ResultDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +73,11 @@
 		E65C278324104D01008E57BC /* FirebasePhotoReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebasePhotoReader.swift; sourceTree = "<group>"; };
 		E65C278524104D01008E57BC /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		E65C278624104D01008E57BC /* DataManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagement.swift; sourceTree = "<group>"; };
+		E65C27A524141800008E57BC /* TextResultScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextResultScreenViewController.swift; sourceTree = "<group>"; };
+		E65C27A724141843008E57BC /* ResultScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScreenViewModel.swift; sourceTree = "<group>"; };
+		E65C27A924141C96008E57BC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E65C27AC24144E2E008E57BC /* ResultDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailViewController.swift; sourceTree = "<group>"; };
+		E65C27AE24144E3D008E57BC /* ResultDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailViewModel.swift; sourceTree = "<group>"; };
 		ED391D6C41C78B476BB28BB6 /* Pods-test-ocr-appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test-ocr-appTests.release.xcconfig"; path = "Target Support Files/Pods-test-ocr-appTests/Pods-test-ocr-appTests.release.xcconfig"; sourceTree = "<group>"; };
 		F2B2E501D964D77F35821DCE /* Pods-test-ocr-appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test-ocr-appTests.debug.xcconfig"; path = "Target Support Files/Pods-test-ocr-appTests/Pods-test-ocr-appTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,9 +167,11 @@
 		E65C276824104D01008E57BC /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				E65C27A4241417F1008E57BC /* TextResultScreen */,
 				E65C276924104D01008E57BC /* LandingScreen */,
 				E65C276E24104D01008E57BC /* ResultsScreen */,
 				E65C277224104D01008E57BC /* AlertsFactory.swift */,
+				E65C27A924141C96008E57BC /* Constants.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -177,6 +189,7 @@
 		E65C276E24104D01008E57BC /* ResultsScreen */ = {
 			isa = PBXGroup;
 			children = (
+				E65C27AB24144E19008E57BC /* ResultDetailScreen */,
 				E65C276F24104D01008E57BC /* ResultsTableViewCell.swift */,
 				E65C277024104D01008E57BC /* ResultsTableViewController.swift */,
 				E65C277124104D01008E57BC /* ResultsViewModel.swift */,
@@ -237,6 +250,24 @@
 				E65C278624104D01008E57BC /* DataManagement.swift */,
 			);
 			path = DataManagement;
+			sourceTree = "<group>";
+		};
+		E65C27A4241417F1008E57BC /* TextResultScreen */ = {
+			isa = PBXGroup;
+			children = (
+				E65C27A524141800008E57BC /* TextResultScreenViewController.swift */,
+				E65C27A724141843008E57BC /* ResultScreenViewModel.swift */,
+			);
+			path = TextResultScreen;
+			sourceTree = "<group>";
+		};
+		E65C27AB24144E19008E57BC /* ResultDetailScreen */ = {
+			isa = PBXGroup;
+			children = (
+				E65C27AC24144E2E008E57BC /* ResultDetailViewController.swift */,
+				E65C27AE24144E3D008E57BC /* ResultDetailViewModel.swift */,
+			);
+			path = ResultDetailScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -428,14 +459,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				E65C278B24104D01008E57BC /* ResultsTableViewController.swift in Sources */,
+				E65C27AA24141C96008E57BC /* Constants.swift in Sources */,
+				E65C27A824141843008E57BC /* ResultScreenViewModel.swift in Sources */,
+				E65C27A624141800008E57BC /* TextResultScreenViewController.swift in Sources */,
 				E65C278C24104D01008E57BC /* ResultsViewModel.swift in Sources */,
 				E65C278724104D01008E57BC /* LandingViewController.swift in Sources */,
 				E65C279924104D01008E57BC /* DataManager.swift in Sources */,
 				E65C279624104D01008E57BC /* PhotoReading.swift in Sources */,
 				E65C279A24104D01008E57BC /* DataManagement.swift in Sources */,
+				E65C27AF24144E3D008E57BC /* ResultDetailViewModel.swift in Sources */,
 				E65C279124104D01008E57BC /* AppDelegate.swift in Sources */,
 				E65C279024104D01008E57BC /* UIImageExtensions.swift in Sources */,
 				E65C278D24104D01008E57BC /* AlertsFactory.swift in Sources */,
+				E65C27AD24144E2E008E57BC /* ResultDetailViewController.swift in Sources */,
 				E65C279724104D01008E57BC /* VisionPhotoReader.swift in Sources */,
 				E65C278924104D01008E57BC /* LandingPageViewModel.swift in Sources */,
 				E65C278A24104D01008E57BC /* ResultsTableViewCell.swift in Sources */,
@@ -603,14 +639,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TX2UD655QQ;
+				DEVELOPMENT_TEAM = QFXW9CXL27;
 				INFOPLIST_FILE = "test-ocr-app/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mobi.itart.test-ocr-app";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jeppesen.engineering.ocr-test";
 				PRODUCT_NAME = OCR;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -625,14 +661,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TX2UD655QQ;
+				DEVELOPMENT_TEAM = QFXW9CXL27;
 				INFOPLIST_FILE = "test-ocr-app/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mobi.itart.test-ocr-app";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jeppesen.engineering.ocr-test";
 				PRODUCT_NAME = OCR;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

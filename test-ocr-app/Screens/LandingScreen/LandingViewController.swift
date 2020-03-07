@@ -16,9 +16,11 @@ class LandingViewController: UIViewController {
     @IBOutlet private weak var takePictureButton: UIButton!
     @IBOutlet private weak var browseResultsButton: UIButton!
     @IBOutlet private weak var resultTextView: UITextView!
+    @IBOutlet private weak var cardView: UIView!
+    
+    private var resultScreenVC: UIViewController? = nil
     
     private let viewModel: LandingPageViewModel
-    
     private let imagePicker: UIImagePickerController = UIImagePickerController()
     
     required init?(coder: NSCoder) {
@@ -33,28 +35,59 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setup(imagePicker: imagePicker)
+        setup(cardView: cardView)
         setup(viewModel: viewModel)
+    }
+    
+    private func setup(imagePicker: UIImagePickerController) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePicker.sourceType = .camera
+            imagePicker.cameraDevice = .rear
+            imagePicker.cameraCaptureMode = .photo
+        } else {
+            imagePicker.sourceType = .photoLibrary
+        }
+        
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+        imagePicker.imageExportPreset = .current
+    }
+    
+    private func setup(cardView: UIView) {
+        cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showResult)))
+    }
+    
+    @objc private func showResult() {
+        let vm = TextResultScreenViewModel(text: viewModel.text ?? "")
+        let vc = TextResultScreenViewController(viewModel: vm)
+        
+        present(vc, animated: true, completion: nil)
     }
     
     @IBAction private func takePicture() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
-            case .authorized: self.presentImagePicker()
-            case .notDetermined: // The user has not yet been asked for camera access.
-                AVCaptureDevice.requestAccess(for: .video) { granted in
-                    if granted {
-                        self.presentImagePicker()
-                    }
+        case .authorized:  self.presentImagePicker()
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                // The completion handler is called on an arbitrary dispatch queue. Is it the client's responsibility to ensure that any UIKit-related updates are called on the main queue or main thread as a result.
+                
+                if granted {
+                    DispatchQueue.main.async { self.presentImagePicker() }
+                } else {
+                    DispatchQueue.main.async { self.presentCameraAlert(text: "You have denied camera access. Without camera you're device have to sadly refuse reading text from image as it is blind. If you think we're good, please go to settings and grant access") }
                 }
+            }
             
-            case .denied:
-                self.presentCameraAlert(text: "You have denied camera access. Without camera you're device have to sadly refuse reading text from image as it is blind. If you think we're good, please go to settings and grant access")
-                return
-
-            case .restricted:
-                self.presentCameraAlert(text: "Access to camera is restricted and cannot be granted. Contact your parents or administrator")
-                return
+        case .denied:
+            self.presentCameraAlert(text: "You have denied camera access. Without camera you're device have to sadly refuse reading text from image as it is blind. If you think we're good, please go to settings and grant access")
+            return
+            
+        case .restricted:
+            self.presentCameraAlert(text: "Access to camera is restricted and cannot be granted. Contact your parents or administrator")
+            return
         @unknown default:
-            fatalError()
+            assertionFailure("Unhandled camera permission state")
         }
     }
     
@@ -74,10 +107,6 @@ class LandingViewController: UIViewController {
             self.presentCameraAlert(text: "Camera is not capable of capturing images")
         }
         
-        self.imagePicker.sourceType = .camera
-        self.imagePicker.delegate = self
-        self.imagePicker.cameraDevice = .rear
-        
         present(self.imagePicker, animated: true, completion: nil)
     }
     
@@ -91,7 +120,7 @@ class LandingViewController: UIViewController {
     private func setup(viewModel: LandingPageViewModel) {
         self.resultTextView.text = viewModel.text
         self.previewView.image = viewModel.image
-        self.resultTextView.isHidden = (viewModel.text?.count == 0)
+        self.cardView.isHidden = ((viewModel.text?.count ?? 0) == 0)
         
         viewModel.didUpdate = self.setup
     }
