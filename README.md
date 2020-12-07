@@ -1,5 +1,10 @@
 # test-ocr-app
 
+This small, sample application is to demonstrate OCR capable application.
+Requirements for this app have been:
+- iOS 12, Swift 5
+- reading short text fragments (character strings)
+
 To build this project you need to install dependencies via Cocoapods
 
 `pod install` should generally help if pods are in place
